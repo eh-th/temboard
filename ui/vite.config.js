@@ -34,6 +34,7 @@ export default defineConfig({
       },
       input: {
         "settings.about": "/settings.about.js",
+        activity: "/activity.js",
         dashboard: "/dashboard.js",
         home: "/home.js",
         temboard: "/temboard.js",
