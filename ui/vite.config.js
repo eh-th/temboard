@@ -37,6 +37,7 @@ export default defineConfig({
         activity: "/activity.js",
         dashboard: "/dashboard.js",
         home: "/home.js",
+        monitoring: "/monitoring.js",
         temboard: "/temboard.js",
       },
     },

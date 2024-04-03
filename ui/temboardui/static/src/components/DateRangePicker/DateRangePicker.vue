@@ -2,8 +2,8 @@
 import daterangepicker from "daterangepicker";
 import * as _ from "lodash";
 import moment from "moment";
-import { computed, onMounted, ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router/composables";
+import { computed, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 import dateMath from "../../datemath.js";
 import rangeUtils from "../../rangeutils.js";
@@ -58,6 +58,7 @@ watch(rawFromTo, () => {
   //  - convert 'date' to unix timestamp (ms) if it's a moment object
   //  - not do anything if date is a string ('now - 24h' for example)
   router.push({
+    path: route.path,
     query: _.assign({}, route.query, {
       start: "" + rawFrom.value,
       end: "" + rawTo.value,
@@ -68,7 +69,10 @@ watch(rawFromTo, () => {
 });
 watch(refreshInterval, refresh);
 
-watch(route, (to, from) => {
+router.afterEach((to) => {
+  if (!to.query.start || !to.query.end) {
+    return;
+  }
   // Detect changes in browser history (back button for example)
   if (to.query.start) {
     rawFrom.value = convertTimestampToDate(to.query.start);
@@ -89,7 +93,7 @@ const rangeString = computed(() => {
   });
 });
 
-onMounted(() => {
+router.isReady().then(() => {
   /**
    * Parse location to get start and end date
    * If dates are not provided, falls back to the date range corresponding to
