@@ -33,6 +33,7 @@ export default defineConfig({
         },
       },
       input: {
+        "alerting.checks": "/alerting.checks.js",
         "settings.about": "/settings.about.js",
         activity: "/activity.js",
         dashboard: "/dashboard.js",
