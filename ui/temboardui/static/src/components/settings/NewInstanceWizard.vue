@@ -5,7 +5,7 @@
  * render a preview of the managed instance. Disables plugins not loaded in
  * agent.
  */
-import { computed, nextTick, onUpdated, reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 
 import Error from "../Error.vue";
 import ModalDialog from "../ModalDialog.vue";
@@ -59,17 +59,6 @@ const plugins = computed(() => {
       selected: state.discover_data.temboard.plugins.indexOf(name) !== -1,
     };
   });
-});
-
-onUpdated(() => {
-  $('[data-toggle="tooltip"]', root.value.$el).tooltip();
-  if ("register" === state.wizard_step && plugins && !$("#selectGroups").data("multiselect")) {
-    nextTick(formCmp.value.setup_multiselects);
-  }
-  if ("register" === state.wizard_step && $("#selectGroups").data("multiselect")) {
-    $("#selectGroups").multiselect(waiting.value ? "disable" : "enable");
-    $("#selectPlugins").multiselect(waiting.value ? "disable" : "enable");
-  }
 });
 
 function discover() {

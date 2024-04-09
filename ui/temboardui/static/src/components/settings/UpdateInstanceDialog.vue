@@ -6,7 +6,7 @@
  * render a preview of the managed instance. Disables plugins not loaded in
  * agent.
  */
-import { computed, nextTick, onUpdated, reactive, ref } from "vue";
+import { computed, nextTick, reactive, ref } from "vue";
 
 import Error from "../Error.vue";
 import ModalDialog from "../ModalDialog.vue";
@@ -55,14 +55,6 @@ const groups = computed(() => {
       selected: form.current_groups.indexOf(group.name) !== -1,
     };
   });
-});
-
-onUpdated(() => {
-  $('[data-toggle="tooltip"]', root.value.$el).tooltip();
-  if ($("#selectGroups").data("multiselect")) {
-    $("#selectGroups").multiselect(waiting.value ? "disable" : "enable");
-    $("#selectPlugins").multiselect(waiting.value ? "disable" : "enable");
-  }
 });
 
 function discover_agent() {

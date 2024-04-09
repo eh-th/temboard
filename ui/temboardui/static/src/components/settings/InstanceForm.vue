@@ -1,5 +1,5 @@
 <script setup>
-import { onUpdated, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 import InstanceDetails from "./InstanceDetails.vue";
 
@@ -32,7 +32,8 @@ watch(
   },
 );
 
-onUpdated(() => {
+onMounted(() => {
+  setup_multiselects();
   $('[data-toggle="tooltip"]', root.value.$el).tooltip();
   if ($("#selectGroups").data("multiselect")) {
     $("#selectGroups").multiselect(props.waiting ? "disable" : "enable");
