@@ -145,7 +145,7 @@ defineExpose({ setup_multiselects, teardown_multiselects });
               id="inputNotify"
               class="form-check-input"
               type="checkbox"
-              v-model="notify"
+              :value="notify"
               v-bind:disabled="waiting"
             />
             <label for="inputNotify" class="control-label">Notify users of any status alert.</label>
